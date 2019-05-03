@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator Test</title>
+
+    <script>
+        function Calculator(number1, number2) {
+            // Attributes
+            this.number1 = number1;
+            this.number2 = number2;
+
+            // Methods
+            this.addNumbers = function() {
+                return this.number1 + this.number2;
+            }
+        }
+
+        function runAddition() {
+            // Get Numbers from User
+            let number1 = parseInt(document.getElementById("number1").value);
+            let number2 = parseInt(document.getElementById("number2").value);
+
+            // Make an instance of the calculator
+            let newCalculator = new Calculator(number1, number2);
+
+            // Run the addition function on the calculator contents and display
+            document.getElementById("output").innerHTML = newCalculator.addNumbers();
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Calculator Test</h1>
+    <label for="number1">NUMBER 1:</label>
+    <input type="text" id="number1"/>
+    <br/>
+    <label for="number2">NUMBER 2:</label>
+    <input type="text" id="number2"/>
+    <br/>
+    <button type="button" onclick="runAddition()">ADD</button>
+
+    <div id="output"></div>
+</body>
+</html>
