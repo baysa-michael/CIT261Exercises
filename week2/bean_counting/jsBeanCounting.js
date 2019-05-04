@@ -17,7 +17,7 @@ function getBAndLetterCount() {
         totalBs + " 'B' character" + (totalBs > 1 ? "s" : "") + " and " + totalChars +
         " '" + userLetter + "' character" + (totalChars > 1 ? "s" : "") + ".";
 
-    // Output the resopnse
+    // Output the response
     document.getElementById("output").innerHTML = response;
     console.log(response);
 }

@@ -2,7 +2,7 @@ function startChessboard() {
     // Get the chessboard size input by the user
     let size = parseInt(document.getElementById("size").value);
 
-    // Confirm that a number was inputby the user
+    // Confirm that a number was input by the user
     if (isNaN(size)) {
         buildChessboard();
     } else {

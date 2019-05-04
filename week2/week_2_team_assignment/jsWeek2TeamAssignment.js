@@ -19,13 +19,11 @@ function summing(){
     let number=parseInt(document.getElementById("numberInput").value);
     let sum=0;
 
-    for(i=1; i <= number; i++){
-
-        sum+=i;
-
+    for(let i = 1; i <= number; i++){
+        sum += i;
     }
 
-    document.getElementById("sumOuputDiv").innerHTML=sum;
+    document.getElementById("sumOutputDiv").innerHTML = "Sum:  " + sum;
 }
 
 //03

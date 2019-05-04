@@ -10,6 +10,6 @@ function setMinimum() {
     let minNumber = Math.min(number1, number2);
 
     // Output the minimum
-    document.getElementById("output").innerHTML = minNumber;
-    console.log(minNumber);
+    document.getElementById("output").innerHTML = "Minimum:  " + minNumber;
+    console.log("Minimum:  " + minNumber);
 }
