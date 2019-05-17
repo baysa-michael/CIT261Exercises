@@ -115,13 +115,13 @@ function selectCell(cellID) {
     // Determine if player has won the game from last move or if there is a stalemate
     if (checkVictory(playerSymbol, cellID)) {
         // Display the victory status
-        document.getElementById("victoryStatus").innerHTML = "Player " + currentPlayer + " is the winner!";
+        document.getElementById("message").innerHTML = "Player " + currentPlayer + " is the winner!";
 
         // Remove the listeners and preserve the board
         removeListeners()
     } else if (checkStalemate()) {
         // Display the victory status
-        document.getElementById("victoryStatus").innerHTML = "This round is a stalemate.";
+        document.getElementById("message").innerHTML = "This round is a stalemate.";
 
         // Remove the listeners and preserve the board
         removeListeners()
