@@ -3,8 +3,7 @@ window.addEventListener("load", resetBoard);
 
 
 function resetBoard() {
-    // Reset Victory Status and Player Turn
-    document.getElementById("victoryStatus").innerHTML = "";
+    // Reset Status and Player Turn
     document.getElementById("playerTurn").innerHTML = "1";
 
     // Clear the current board
