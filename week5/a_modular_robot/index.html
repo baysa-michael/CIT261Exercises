@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Modular Robot</title>
+</head>
+<body>
+    <h1>A Modular Robot</h1>
+    <p>Bindings Created in Chapter 7 Project</p>
+    <ul>
+        <li>roads</li>
+        <li>buildGraph</li>
+        <li>roadGraph</li>
+        <li>VillageState</li>
+        <li>runRobot</li>
+        <li>randomPick</li>
+        <li>randomRobot</li>
+        <li>mailRoute</li>
+        <li>routeRobot</li>
+        <li>findRoute</li>
+        <li>goalOrientedRobot</li>
+    </ul>
+    <p>Question:  If you were to write that project as a modular program, what modules would you create?</p>
+    <p>Answer:  Although I did not complete the Chapter 7 project noted here, it looks like there would be two
+    key modules which should be included if the project were to be divided up as such:</p>
+    <ul>
+        <li>Robot</li>
+        <li>Village</li>
+    </ul>
+    <p>Question:  Which module would depend on which other module, and what would their interfaces look like?</p>
+    <p>The Village module would depend on the Robot module, as the robot is a component of the village.  The interface
+    for the robot would have a runRobot, randomRobot, routeRobot, and goalOrientedRobot interface.</p>
+    <p>Question:  Which pieces are likely to be available prewritten on NPM?</p>
+    <p>Answer:  Given the size of NPM, there may already be a Robot package that does what we need.</p>
+    <p>Question:  Would you prefer to use an NPM package or write them yourself?</p>
+    <p>Answer:  I prefer to be in control and know what is going on, so I would most likely write it myself.</p>
+</body>
+</html>
