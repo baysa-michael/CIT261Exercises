@@ -42,8 +42,7 @@ const hikeList =
 
   ];
 
-// Hike Model
-export default class HikeModel 
+export default class HikeModel
 {
   constructor(){}
   
