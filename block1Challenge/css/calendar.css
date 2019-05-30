@@ -1,0 +1,12 @@
+body, #actions {
+    text-align: center;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+#actions button {
+    display: block;
+    margin: auto;
+}
