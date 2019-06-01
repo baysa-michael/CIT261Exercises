@@ -37,6 +37,7 @@ class ViewUtilities {
 
         // Div attributes
         newDiv.id = baseID + "Div";
+        newDiv.classList.add("divLabelInputSet");
 
         // Add the new label to the div
         newDiv.appendChild(this.createLabel(contents, name, baseID + "Label", ["formLabel"]));
@@ -51,6 +52,7 @@ class ViewUtilities {
         // Create a new div element
         let newDiv = document.createElement("div");
         newDiv.id = formName + "SubmitResetDiv";
+        newDiv.classList.add("divResetSubmitSet");
 
         // Add Submit & Reset Buttons
         newDiv.appendChild(this.createInput("reset", formName + "Reset", "",
@@ -60,6 +62,7 @@ class ViewUtilities {
 
         return newDiv;
     }
+
 
 }
 

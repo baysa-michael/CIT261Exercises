@@ -3,10 +3,81 @@ body, #actions {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p, td {
+    font-size: 1.25rem;
 }
 
 #actions button {
-    display: block;
+    display: inline-block;
+    width: 40%;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+table {
     margin: auto;
+    width: 90%;
+    border: 15px black solid;
+    border-collapse: collapse;
+}
+
+th {
+    border: 3px solid black;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid black;
+    font-weight: normal;
+}
+
+form {
+    width: 60%;
+    margin: auto;
+    border: 10px solid black;
+    padding: 10px;
+}
+
+.divLabelInputSet {
+    display:flex;
+    justify-content: space-between;
+
+    font-size: 1.25em;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.divLabelInputSet label, .divLabelInputSet input {
+    margin: 1em;
+}
+
+.divLabelInputSet label {
+    text-align: left;
+}
+
+.divLabelInputSet input {
+    width: 50%;
+}
+
+.divResetSubmitSet {
+    display:flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.divResetSubmitSet input {
+    font-size: 2em;
+    font-weight: bold;
 }
