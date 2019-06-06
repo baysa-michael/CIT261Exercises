@@ -79,7 +79,7 @@ function resetBoard() {
     // Collapse the borders
     board.style.borderCollapse = "collapse";
 
-    // Append the finalized board to the target element
+    // Append the finalized board to the targetOutput element
     boardContainer.appendChild(board);
 }
 

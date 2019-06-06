@@ -5,7 +5,7 @@ function getBAndLetterCount() {
     // Retrieve the user search string
     let userString = document.getElementById("userString").value;
 
-    // Retrieve the user target letter
+    // Retrieve the user targetOutput letter
     let userLetter = (document.getElementById("userLetter").value)[0];
 
     // Get the total character counts in the string

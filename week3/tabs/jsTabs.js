@@ -10,7 +10,7 @@ function asTabs(tabNode, targetNode) {
         tabNode.removeChild(targetChild);
     }
 
-    // Add new tab buttons for each child element of the target node
+    // Add new tab buttons for each child element of the targetOutput node
     for (let i = 0; i < targetNode.children.length; i++) {
         // Create a new button tab for the child node
         let newButton = document.createElement("button");
@@ -18,7 +18,7 @@ function asTabs(tabNode, targetNode) {
         newButton.id = "button" + i;
 
         // Add Listener to the Button
-        newButton.addEventListener("click", event => {
+        newButton.addEventListener("click", () => {
             changeTabs(targetNode.children[i], tabNode);
         });
 
