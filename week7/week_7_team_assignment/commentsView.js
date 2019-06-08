@@ -8,6 +8,7 @@ class CommentsView {
     static buildCommentInsert(hikeName, functionRef) {
         // Create the form to add
         const newForm = document.createElement("form");
+        newForm.id = "addCommentForm";
 
         // Add a reference to the function to be executed when submitting the form
         newForm.onsubmit = functionRef;
@@ -19,13 +20,13 @@ class CommentsView {
         let formInstructions = document.createElement("p");
         formInstructions.innerHTML = "Please enter in all information and then click on Submit";
 
-        let hikeNameSpan = document.createElement("span");
-        hikeNameSpan.id = "hikeName";
-        hikeNameSpan.innerHTML = hikeName;
+        let hikeNameElement = document.createElement("p");
+        hikeNameElement.id = "hikeName";
+        hikeNameElement.innerHTML = hikeName;
 
         newForm.appendChild(formHeader);
         newForm.appendChild(formInstructions);
-        newForm.appendChild(hikeNameSpan);
+        newForm.appendChild(hikeNameElement);
 
         // Create the labels and inputs
         newForm.appendChild(ViewUtilities.createLabelInputSet("Comment Date", "commentDate",
