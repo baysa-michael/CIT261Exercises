@@ -65,6 +65,10 @@ class HikesView {
             </div>
         
         `;
+
+    // Added Functionality for Comments
+
+
     parent.innerHTML = '';
     item.insertBefore(backButton, item.childNodes[0]);
     parent.appendChild(item);
