@@ -6,15 +6,17 @@ const COMMENT_TYPE = {
 };
 
 class CommentsController {
-    constructor() {
+    constructor(addCommentsElement, displayCommentsElement) {
+        this.addCommentsElement = addCommentsElement;
+        this.displayCommentsElement = displayCommentsElement;
         this.commentList = [];
     }
 
     addComment() {
         // Grab information from form
-        let target = document.getElementById("hikeName");
-        let commentDate = document.getElementById("commentDate");
-        let comment = document.getElementById("comment");
+        let target = document.getElementById("hikeName").innerHTML;
+        let commentDate = document.getElementById("commentDateInput").value;
+        let comment = document.getElementById("commentInput").value;
 
         // Build Comment
         let newComment = new CommentsModel(COMMENT_TYPE.HIKE, target, commentDate, comment);
@@ -27,9 +29,11 @@ class CommentsController {
     }
 
     saveComments() {
+        console.log(this.commentList);
         // Extract all hike comments in the comments list
         let hikeComments = this.commentList.filter(element => {
-            element.commentType === COMMENT_TYPE.HIKE;
+            console.log(element);
+            return element.commentType === COMMENT_TYPE.HIKE;
         });
 
         // Convert the comments list to JSON
@@ -37,12 +41,9 @@ class CommentsController {
 
         // Save the comments to Session Storage
         window.sessionStorage.setItem(COMMENT_TYPE.HIKE, hikeCommentsJSON);
-
-        // Reset the form once the comment has been saved
-        document.getElementById("addAppointmentForm").reset();
     }
 
-    static retrieveComments() {
+    retrieveComments() {
         return CommentsModel.jsonToComments(window.sessionStorage.getItem(COMMENT_TYPE.HIKE));
     }
 
@@ -55,16 +56,32 @@ class CommentsController {
             this.addComment();
 
             // Clear the form
-
+            document.getElementById("addCommentForm").reset();
         }));
     }
 
-    static clearCommentForm(parentElement) {
-        parentElement.clear();
+    clearCommentForm(parentElement) {
+        parentElement.innerHTML = "";
     }
 
-    displayComment() {
+    clearCommentList(parentElement) {
+        parentElement.innerHTML = "";
+    }
 
+    displayComments(parentElement, hikeName) {
+        // Retrieve and filter the array of comments
+        let commentsArray = this.retrieveComments();
+        if (commentsArray === null) {
+            parentElement.innerHTML = "<hr/><b>NO COMMENTS TO DISPLAY</b><hr/>";
+        } else {
+            let hikeCommentsArray = commentsArray.filter(element => {
+                return element.commentType === COMMENT_TYPE.HIKE &&
+                    element.targetName === hikeName;
+            });
+
+            // Render the comments
+            parentElement.appendChild(CommentsView.renderCommentDisplay(hikeCommentsArray));
+        }
     }
 }
 

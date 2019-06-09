@@ -16,8 +16,9 @@ export default class HikesController {
     this.hikesView = new HikesView(parentId);
 
     // START ADD
-    this.commentsElement = document.getElementById("comments");
-    this.commentController = new CommentsController();
+    this.addCommentsElement = document.getElementById("addComments");
+    this.displayCommentsElement = document.getElementById("displayComments");
+    this.commentController = new CommentsController(this.addCommentsElement, this.displayCommentsElement);
     // END ADD
   }
   showHikeList() {
@@ -36,10 +37,12 @@ export default class HikesController {
       hike
     ).ontouchend = () => {
       this.showHikeList();
-      this.commentController.clearCommentForm(this.commentsElement);
+      this.commentController.clearCommentList(this.displayCommentsElement);
+      this.commentController.clearCommentForm(this.addCommentsElement);
     };
     // INSERTED
-    this.commentController.addCommentForm(this.commentsElement, hikeName);
+    this.commentController.displayComments(this.displayCommentsElement, hikeName);
+    this.commentController.addCommentForm(this.addCommentsElement, hikeName);
     // END INSERT
   }
   // in order to show the details of a hike ontouchend we will need to attach a listener AFTER the list of hikes has been built. The function below does that.

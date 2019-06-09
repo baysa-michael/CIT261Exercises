@@ -41,8 +41,27 @@ class CommentsView {
         return newForm;
     }
 
-    renderCommentDisplay() {
+    static renderCommentDisplay(commentsArray) {
+        let commentDisplay = document.createElement("div");
 
+        commentsArray.forEach(element => {
+            let newBreak = document.createElement("hr");
+
+            let newHeader = document.createElement("h2");
+            newHeader.innerHTML = `Comment for ${element.targetName} on ${element.commentDate}`;
+
+            let newComment = document.createElement("p");
+            newComment.innerHTML = element.comment;
+
+            commentDisplay.appendChild(newBreak);
+            commentDisplay.appendChild(newHeader);
+            commentDisplay.appendChild(newComment);
+        });
+
+        let endBreak = document.createElement("hr");
+        commentDisplay.appendChild(endBreak);
+
+        return commentDisplay;
     }
 
 }

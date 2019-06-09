@@ -8,7 +8,7 @@ class CommentsModel {
 
     static commentsToJSON(commentsArray) {
         // Start of JSON Object
-        let jsonString = "{";
+        let jsonString = `{"hikeComments":[`;
 
         // JSON Array of Comments
         let firstItem = true;
@@ -18,36 +18,40 @@ class CommentsModel {
             } else {
                 jsonString += ",";
             }
-            jsonString += `["commentType":"${arrayItem.commentType}"` +
+            jsonString += `{"commentType":"${arrayItem.commentType}"` +
                 `,"targetName":"${arrayItem.targetName}"` +
                 `,"commentDate":"${arrayItem.commentDate}"` +
-                `,"comment":"${arrayItem.comment}]"`;
+                `,"comment":"${arrayItem.comment}"}`;
         });
 
         // End the JSON Object
-        jsonString += "}";
+        jsonString += "]}";
 
         return jsonString;
     }
 
     static jsonToComments(jsonString) {
-        // Parse the string into a JSON object
-        let jsonObject = JSON.parse(jsonString);
+        if (jsonString !== null) {
+            // Parse the string into a JSON object
+            let jsonObject = JSON.parse(jsonString);
 
-        let commentArray = [];
+            let commentArray = [];
 
-        for (let target of jsonObject) {
-            let newComment = new CommentsModel(
-                target.commentType,
-                target.targetName,
-                target.commentDate,
-                target.comment
-            );
+            for (let target of jsonObject["hikeComments"]) {
+                let newComment = new CommentsModel(
+                    target.commentType,
+                    target.targetName,
+                    target.commentDate,
+                    target.comment
+                );
 
-            commentArray.push(newComment);
+                commentArray.push(newComment);
+            }
+
+            return commentArray;
+        } else {
+            return null;
         }
-
-        return commentArray;
     }
 
     // ADD FUNCTION TO FILTER COMMENTS BY NAME
