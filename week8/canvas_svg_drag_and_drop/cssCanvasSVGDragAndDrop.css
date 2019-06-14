@@ -1,0 +1,14 @@
+.drawBorder {
+    border: 1px solid black;
+}
+
+.dragContainer {
+    border: 5px solid green;
+    padding: 15px;
+    height: 220px;
+    width: 220px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
