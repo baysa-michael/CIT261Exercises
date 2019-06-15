@@ -62,8 +62,47 @@ function displayPeople(jsonPeople) {
     people.forEach(item => {
         // Create the List Item
         let insertListItem = document.createElement("li");
-        insertListItem.innerHTML = item.name;
         insertListItem.classList.add("peopleListItem");
+
+        // Add the name of the individual to the list item
+        let insertName = document.createElement("h2");
+        insertName.classList.add("itemName");
+        insertName.innerHTML = item.name;
+        insertListItem.appendChild(insertName);
+
+        // Add a container for all other individual information
+        let insertData = document.createElement("div");
+/*
+        let insertDataID = "people" + removeSpaceFromString(item.name);
+        insertData.id = insertDataID;
+*/
+        insertData.classList.add("toggleViewOff");
+        insertData.appendChild(
+            individualDataContainer("Birth Year", item.birth_year.toUpperCase())
+        );
+        insertData.appendChild(
+            individualDataContainer("Gender", item.gender.toUpperCase())
+        );
+        insertData.appendChild(
+            individualDataContainer("Hair Color", item.hair_color.toUpperCase())
+        );
+        insertData.appendChild(
+            individualDataContainer("Height (CM)", item.height.toUpperCase())
+        );
+        insertData.appendChild(
+            individualDataContainer("Mass (KG)", item.mass.toUpperCase())
+        );
+        insertData.appendChild(
+            individualDataContainer("Skin Color", item.skin_color.toUpperCase())
+        );
+
+        // Append the Other Information to the List Item
+        insertListItem.appendChild(insertData);
+
+        // Add a listener to the list name to toggle the view via CSS
+        insertListItem.addEventListener("click", () => {
+            toggleView(insertData);
+        });
 
         // Append the List Item to the list
         insertList.appendChild(insertListItem);
@@ -71,6 +110,42 @@ function displayPeople(jsonPeople) {
 
     // Add the completed list to the target
     peopleList.appendChild(insertList);
+}
+
+function individualDataContainer(attribute, value) {
+    // Create the Container
+    let thisContainer = document.createElement("div");
+
+    // Set the Attribute Header
+    let thisAttribute = document.createElement("h3");
+    thisAttribute.classList.add("individualAttributeType");
+    thisAttribute.innerHTML = attribute;
+
+    // Set the Attribute Value
+    let attributeValue = document.createElement("p");
+    attributeValue.classList.add("individualAttributeValue");
+    attributeValue.innerHTML = value;
+
+    // Load the items on the container
+    thisContainer.appendChild(thisAttribute);
+    thisContainer.appendChild(attributeValue);
+
+    // Return the Completed Container
+    return thisContainer;
+}
+
+function removeSpaceFromString(input) {
+    return input.replace(/\s+/g, '');
+}
+
+function toggleView(targetElement) {
+    if (targetElement.classList.contains("toggleViewOff")) {
+        targetElement.classList.remove("toggleViewOff");
+        targetElement.classList.add("toggleViewOn");
+    } else {
+        targetElement.classList.add("toggleViewOff");
+        targetElement.classList.remove("toggleViewOn");
+    }
 }
 
 window.addEventListener("load", () => {
