@@ -27,6 +27,7 @@ function displayPeople(jsonPeople) {
 
     // Create the buttons for the navigation with appropriate listeners/status
     let previousButton = document.createElement("button");
+    previousButton.id = "previousButton";
     previousButton.innerHTML = "PREVIOUS";
     previousButton.classList.add("navigationButton");
     if (jsonPeople.previous === null) {
@@ -38,6 +39,7 @@ function displayPeople(jsonPeople) {
     }
 
     let nextButton = document.createElement("button");
+    nextButton.id = "nextButton";
     nextButton.innerHTML = "NEXT";
     nextButton.classList.add("navigationButton");
     if (jsonPeople.next === null) {
@@ -71,12 +73,23 @@ function displayPeople(jsonPeople) {
         insertListItem.appendChild(insertName);
 
         // Add a container for all other individual information
-        let insertData = document.createElement("div");
-/*
-        let insertDataID = "people" + removeSpaceFromString(item.name);
-        insertData.id = insertDataID;
-*/
+        let insertData = document.createElement("table");
         insertData.classList.add("toggleViewOff");
+
+        // Add table header row
+        let headerRow = document.createElement("tr");
+        let attributeHeader = document.createElement("th");
+        attributeHeader.classList.add("attributeColumn");
+        attributeHeader.innerHTML = "ATTRIBUTE";
+
+        let valueHeader = document.createElement("th");
+        valueHeader.classList.add("valueColumn");
+        valueHeader.innerHTML = "VALUE";
+
+        headerRow.appendChild(attributeHeader);
+        headerRow.appendChild(valueHeader);
+        insertData.appendChild(headerRow);
+
         insertData.appendChild(
             individualDataContainer("Birth Year", item.birth_year.toUpperCase())
         );
@@ -114,28 +127,20 @@ function displayPeople(jsonPeople) {
 
 function individualDataContainer(attribute, value) {
     // Create the Container
-    let thisContainer = document.createElement("div");
+    let returnRow = document.createElement("tr");
+    let returnAttribute = document.createElement("td");
+    returnAttribute.classList.add("attributeColumn");
+    returnAttribute.innerHTML = attribute;
 
-    // Set the Attribute Header
-    let thisAttribute = document.createElement("h3");
-    thisAttribute.classList.add("individualAttributeType");
-    thisAttribute.innerHTML = attribute;
+    let returnValue = document.createElement("td");
+    returnValue.classList.add("valueColumn");
+    returnValue.innerHTML = value;
 
-    // Set the Attribute Value
-    let attributeValue = document.createElement("p");
-    attributeValue.classList.add("individualAttributeValue");
-    attributeValue.innerHTML = value;
-
-    // Load the items on the container
-    thisContainer.appendChild(thisAttribute);
-    thisContainer.appendChild(attributeValue);
+    returnRow.appendChild(returnAttribute);
+    returnRow.appendChild(returnValue);
 
     // Return the Completed Container
-    return thisContainer;
-}
-
-function removeSpaceFromString(input) {
-    return input.replace(/\s+/g, '');
+    return returnRow;
 }
 
 function toggleView(targetElement) {

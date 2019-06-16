@@ -1,6 +1,11 @@
+.body {
+    font-size: 1rem;
+}
+
 .peopleList {
     width: 100%;
     list-style: none;
+    padding-left: 0;
 }
 
 .peopleListItem {
@@ -12,10 +17,41 @@
     border-bottom: 1px solid black;
 }
 
+table, tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+th {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+td {
+    padding: 5px;
+}
+
+.valueColumn {
+    text-align: right;
+}
+
 .toggleViewOff {
     display: none;
 }
 
 .toggleViewOn {
     display: block;
+}
+
+.navigationButton {
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#nextButton {
+    float: right;
 }
