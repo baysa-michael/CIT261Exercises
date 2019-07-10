@@ -89,6 +89,39 @@ class KrakenPublicAPIUtilities {
         }
     }
 
+    getOHLCData(assetPair, interval = 1, since = 0) {
+        /*
+            INTERVAL NOTES
+            1 - Minutes - 1/2 Day (12 Hours) of Data
+            5 - 5 Minutes - 2 1/2 Days (60 Hours) of Data
+            15 - 15 Minutes - 7 1/2 Days (180 Hours) of Data
+            30 - 30 Minutes - 15 Days (360 Hours) of Data
+            60 - 1 Hour - 30 Days (720 Hours) of Data
+            240 - 4 Hours - 120 Days (2,880 Hours) of Data
+            1440 - 1 Day - 720 Days (17,280 Hours) of Data
+            10080 - 1 Week -
+            21600 - 15 Days -
+         */
+
+        let extendedURL = `${this.proxyBaseURL}OHLC?pair=${assetPair}&interval=${interval}&since=${since}`;
+
+        try {
+            return this.callAPI(extendedURL);
+        } catch(error) {
+            throw error;
+        }
+    }
+
+    getOrderBook(assetPair, count = null) {
+        let extendedURL = `${this.proxyBaseURL}Depth?pair=${assetPair}` + (count === null ? "" : `count=${count}`);
+
+        try {
+            return this.callAPI(extendedURL);
+        } catch(error) {
+            throw error;
+        }
+    }
+
     getServerTime2() {
         let xmlhttp = new XMLHttpRequest();
         let extendedURL = this.proxyBaseURL + "Time";

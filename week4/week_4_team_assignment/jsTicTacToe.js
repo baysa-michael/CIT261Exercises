@@ -111,7 +111,7 @@ function selectCell(cellID) {
     targetCell.classList.remove("unselected");
     targetCell.classList.add(playerSymbol);
 
-    // Determine if player has won the game from last move or if there is a stalemate
+    // Determine if player has won the game from lastUnix move or if there is a stalemate
     if (checkVictory(playerSymbol, cellID)) {
         // Display the victory status
         document.getElementById("message").innerHTML = "Player " + currentPlayer + " is the winner!";

@@ -77,8 +77,8 @@
   console.table(fifteen);
 
   // Array.prototype.map()
-  // 2. Give us an array of the inventors' first and last names
-  const fullnames = inventors.map(inventor => (inventor.first + ' ' + inventor.last));
+  // 2. Give us an array of the inventors' first and lastUnix names
+  const fullnames = inventors.map(inventor => (inventor.first + ' ' + inventor.lastUnix));
   console.table(fullnames);
 
   // Array.prototype.sort()
@@ -131,7 +131,7 @@
 
 
           // 7. sort Exercise
-          // Sort the people alphabetically by last name
+          // Sort the people alphabetically by lastUnix name
   const alpha = people.sort((lastOne, nextOne) => {
             const [alast, afirst] = lastOne.split(", ");
             const [blast, bfirst] = nextOne.split(", ");

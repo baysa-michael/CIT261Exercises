@@ -1,7 +1,7 @@
 class KrakenTickerInformation {
     constructor(jsonInfo) {
         this.errorMessage = null;
-        this.assetPairList = [];
+        this.tickerInfoList = [];
 
         // Set object if no error exists
         if (jsonInfo.error.length > 0) {
@@ -11,7 +11,7 @@ class KrakenTickerInformation {
             Object.keys(jsonInfo.result).length > 0) {
             // Construct a list from the keys
             Object.keys(jsonInfo.result).forEach((key) => {
-                let assetPair = {
+                let tickerInfo = {
                     pair: key.toUpperCase(),
                     askPrice: jsonInfo.result[key].a[0],
                     askWholeLotVolume: jsonInfo.result[key].a[1],
@@ -34,7 +34,7 @@ class KrakenTickerInformation {
                     openingPriceToday: jsonInfo.result[key].o,
                 };
 
-                this.assetPairList.push(assetPair);
+                this.tickerInfoList.push(tickerInfo);
             });
         } else {
             this.errorMessage = "ERROR:  Result Missing - " +
@@ -46,19 +46,35 @@ class KrakenTickerInformation {
         console.log("**********Kraken Ticker Information Display:");
         console.log(`Error Message:  ${this.errorMessage}`);
         console.log(`Asset Pair Ticker List:`);
-        this.assetPairList.forEach((item) => {
+        this.tickerInfoList.forEach((item) => {
             console.log("*****START ASSET PAIR TICKER*****");
             console.log(item.pair);
-            console.log("ASK:");
-            console.log(`Margin Call - ${item.marginCall}; Margin Stop - ${item.marginStop}`);
-            console.log("Leverage Buy Multipliers:");
-            console.log(item.leverageBuyMultipliers);
-            console.log("Leverage Sell Multipliers:");
-            console.log(item.leverageSellMultipliers);
-            console.log("Fees - Taker:");
-            console.log(item.feesTaker);
-            console.log("Fees - Maker:");
-            console.log(item.feesMaker);
+            console.log("ASK");
+            console.log(`Ask Price:  ${item.askPrice}`);
+            console.log(`Ask Whole Lot Volume:  ${item.askWholeLotVolume}`);
+            console.log(`Ask Lot Volume: ${item.askLotVolume}`);
+            console.log("BID");
+            console.log(`Bid Price:  ${item.bidPrice}`);
+            console.log(`Bid Whole Lot Volume:  ${item.bidWholeLotVolume}`);
+            console.log(`Bid Lot Volume: ${item.bidLotVolume}`);
+            console.log("LAST TRADE");
+            console.log(`Last Trade Closed Price:  ${item.lastTradeClosedPrice}`);
+            console.log(`Last Trade Closed Volume:  ${item.lastTradeClosedVolume}`);
+            console.log("VOLUME");
+            console.log(`Today's Volume:  ${item.volumeToday}`);
+            console.log(`Last 24 Hours Volume:  ${item.volumeLast24Hours}`);
+            console.log("WEIGHTED AVERAGE VOLUME PRICE");
+            console.log(`Today's Weighted Average Volume Price:  ${item.volumeWeightedAveragePriceToday}`);
+            console.log(`Last 24 Hours Weighted Average Volume Price:  ${item.volumeWeightedAveragePriceLast24Hours}`);
+            console.log("TRADE COUNT");
+            console.log(`Today's Count of Trades:  ${item.numberOfTradesToday}`);
+            console.log(`Last 24 Hours Count of Trades:  ${item.numberOfTradesLast24Hours}`);
+            console.log("OPENING, LOW, & HIGH PRICES");
+            console.log(`Today's Opening Price:  ${item.openingPriceToday}`);
+            console.log(`Today's Low Price:  ${item.lowToday}`);
+            console.log(`Last 24 Hours Low Price:  ${item.lowLast24Hours}`);
+            console.log(`Today's High Price:  ${item.highToday}`);
+            console.log(`Last 24 Hours High Price:  ${item.highLast24Hours}`);
             console.log("*****END ASSET PAIR TICKER*****");
         });
     }
