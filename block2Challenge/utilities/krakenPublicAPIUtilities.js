@@ -122,6 +122,26 @@ class KrakenPublicAPIUtilities {
         }
     }
 
+    getRecentTrades(assetPair, since = null) {
+        let extendedURL = `${this.proxyBaseURL}Trades?pair=${assetPair}` + (since === null ? "" : `since=${since}`);
+
+        try {
+            return this.callAPI(extendedURL);
+        } catch(error) {
+            throw error;
+        }
+    }
+
+    getRecentSpread(assetPair, since = null) {
+        let extendedURL = `${this.proxyBaseURL}Spread?pair=${assetPair}` + (since === null ? "" : `since=${since}`);
+
+        try {
+            return this.callAPI(extendedURL);
+        } catch(error) {
+            throw error;
+        }
+    }
+
     getServerTime2() {
         let xmlhttp = new XMLHttpRequest();
         let extendedURL = this.proxyBaseURL + "Time";

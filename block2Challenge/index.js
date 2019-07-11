@@ -5,6 +5,7 @@ import KrakenAssetPairs from "./model/krakenAssetPairs.js";
 import KrakenTickerInformation from "./model/krakenTickerInformation.js";
 import KrakenOHLCData from "./model/krakenOHLCData.js";
 import KrakenOrderBook from "./model/KrakenOrderBook.js";
+import KrakenRecentTrades from "./model/krakenRecentTrades.js";
 
 window.addEventListener("load", () => {
     let myKrakenUtilities = new KrakenPublicAPIUtilities();
@@ -58,6 +59,7 @@ window.addEventListener("load", () => {
     });
 */
 
+/*
     myKrakenUtilities.getOrderBook("xzeczusd").then((response) => {
         // console.log(response);
         let testOrderBook = new KrakenOrderBook(response);
@@ -65,4 +67,22 @@ window.addEventListener("load", () => {
     }).catch((error) => {
         console.log(error.toString());
     });
+*/
+
+/*
+    myKrakenUtilities.getRecentTrades("xzeczusd").then((response) => {
+        console.log(response);
+        let testRecentTrades = new KrakenRecentTrades(response);
+        testRecentTrades.toString();
+    }).catch((error) => {
+        console.log(error.toString());
+    });
+*/
+
+    myKrakenUtilities.getRecentSpread("xzeczusd").then((response) => {
+        console.log(response);
+    }).catch((error) => {
+        console.log(error.toString());
+    });
+
 });

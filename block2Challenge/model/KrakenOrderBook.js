@@ -24,7 +24,7 @@ class KrakenOrderBook {
                     volume: jsonInfo.result[this.pair]["asks"][i][1],
                     unixTime: jsonInfo.result[this.pair]["asks"][i][2],
                     jsTime: GeneralUtilities.convertUnixTimeToJavascript(jsonInfo.result[this.pair]["asks"][i][2])
-                }
+                };
 
                 this.askList.push(askRecord);
             }
@@ -35,7 +35,7 @@ class KrakenOrderBook {
                     volume: jsonInfo.result[this.pair]["bids"][i][1],
                     unixTime: jsonInfo.result[this.pair]["bids"][i][2],
                     jsTime: GeneralUtilities.convertUnixTimeToJavascript(jsonInfo.result[this.pair]["bids"][i][2])
-                }
+                };
 
                 this.askList.push(bidRecord);
             }
