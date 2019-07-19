@@ -41,7 +41,7 @@ class KrakenOrderBook {
             }
         } else {
             this.errorMessage = "ERROR:  Result Missing - " +
-                "Unable to Create KrakenOHLCData Object";
+                "Unable to Create KrakenOrderBook Object";
         }
     }
 

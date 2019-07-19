@@ -27,6 +27,12 @@ class KrakenAssetInfo {
         }
     }
 
+    getAssetInfoListContaining(targetAsset) {
+        return this.assetInfoList.filter((item) => {
+            return (item.primaryName === targetAsset || item.altName === targetAsset);
+        });
+    }
+
     toString() {
         console.log("**********Kraken Asset Info Display:");
         console.log(`Error Message:  ${this.errorMessage}`);

@@ -8,7 +8,7 @@ class KrakenRecentTrades {
         this.lastUnix = null;
         this.lastJS = null;
 */
-        this.tradeList = [];
+        this.spreadList = [];
 
         // Set object if no error exists
         if (jsonInfo.error.length > 0) {
@@ -43,7 +43,7 @@ class KrakenRecentTrades {
             });
         } else {
             this.errorMessage = "ERROR:  Result Missing - " +
-                "Unable to Create KrakenOHLCData Object";
+                "Unable to Create KrakenRecentTrades Object";
         }
     }
 
@@ -55,7 +55,7 @@ class KrakenRecentTrades {
         console.log(`Last Time (Unix) : ${this.lastUnix}`);
         console.log(`Last Time (Javascript) : ${this.lastJS}`);
 */
-        this.tradeList.forEach((item) => {
+        this.spreadList.forEach((item) => {
             console.log("*****START TRADE SET*****");
             console.log(`Price:   ${item.price}`);
             console.log(`Volume:  ${item.volume}`);

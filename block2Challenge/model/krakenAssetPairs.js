@@ -39,6 +39,20 @@ class KrakenAssetPairs {
         }
     }
 
+    getAssetPairListContaining(targetAsset) {
+        return this.assetPairList.filter((item) => {
+            return (item.baseName === targetAsset || item.quoteName === targetAsset);
+        });
+    }
+
+    getAssetPair(primaryCurrency, secondaryCurrency) {
+        return this.assetPairList.filter((item) => {
+            return ((item.baseName === primaryCurrency && item.quoteName === secondaryCurrency) ||
+                (item.baseName === secondaryCurrency && item.quoteName === primaryCurrency) &&
+                (!item.primaryName.includes(".D")))[0];
+        });
+    }
+
     toString() {
         console.log("**********Kraken Asset Pair Display:");
         console.log(`Error Message:  ${this.errorMessage}`);
