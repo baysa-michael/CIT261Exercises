@@ -6,6 +6,7 @@ import KrakenOHLCData from "../model/krakenOHLCData.js";
 import KrakenOrderBook from "../model/KrakenOrderBook.js";
 import KrakenRecentTrades from "../model/krakenRecentTrades.js";
 import KrakenRecentSpread from "../model/krakenRecentSpread.js";
+import KrakenServerTime from "../model/krakenServerTime.js";
 
 class MasterController {
     constructor(serverTime, assetList, assetPairList) {
@@ -37,6 +38,9 @@ class MasterController {
         this.orderBook = null;
         this.recentTrades = null;
         this.recentSpread = null;
+
+        this.apiInterface.logServerTime(this.serverTime.unixtime);
+        this.apiInterface.incrementCallLimitCounter(3);
     }
 
     addPrimaryCurrencySelector() {
@@ -105,6 +109,11 @@ class MasterController {
         this.baseAsset = this.assetList.getAssetInfoListContaining(this.assetPair.baseName)[0];
         this.quoteAsset = this.assetList.getAssetInfoListContaining(this.assetPair.quoteName)[0];
 
+        // Retrieve the updated server time
+        let returnTime = this.apiInterface.getServerTime().then((response) => {
+            return new KrakenServerTime(response);
+        });
+
         // Retrieve the currency pair information
         let returnTicker = this.apiInterface.getTickerInformation(this.currencyPairName).then((response) => {
             return new KrakenTickerInformation(response);
@@ -137,6 +146,7 @@ class MasterController {
         });
 
         this.setAssetPairInformation(
+            await returnTime,
             await returnTicker,
             await returnOHLCData,
             await returnOrderBook,
@@ -146,12 +156,21 @@ class MasterController {
         this.displayAssetPairInformation();
     }
 
-    setAssetPairInformation(ticker, ohlcData, orderBook, recentTrades, recentSpread) {
+    setAssetPairInformation(serverTime, ticker, ohlcData, orderBook, recentTrades, recentSpread) {
+        // Decrement the call counter based on time
+        this.apiInterface.decrementCallLimitCounter(serverTime.unixtime);
+
+        // Load the Data
+        this.serverTime = serverTime;
         this.tickerInfo = ticker;
         this.ohlcData = ohlcData;
         this.orderBook = orderBook;
         this.recentTrades = recentTrades;
         this.recentSpread = recentSpread;
+
+        // Update the Server Time and Increment Counter
+        this.apiInterface.logServerTime(this.serverTime.unixtime);
+        this.apiInterface.incrementCallLimitCounter(6);
 
 /*
         console.log(this.ohlcData);

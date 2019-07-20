@@ -142,6 +142,35 @@ class KrakenPublicAPIUtilities {
         }
     }
 
+    logServerTime(unixServerTime) {
+        window.localStorage.setItem("krakenAPILastServerCall", unixServerTime);
+    }
+
+    incrementCallLimitCounter(incrementAmount) {
+        // Get the current value
+        let currentValue = parseInt(window.localStorage.getItem("krakenAPICallCounter"));
+        let updatedValue = ((currentValue === null || isNaN(currentValue)) ? 0 : currentValue + incrementAmount);
+        updatedValue = (updatedValue < 0 ? 0 : updatedValue);
+
+        window.localStorage.setItem("krakenAPICallCounter", updatedValue);
+
+        console.log(`Updated Call Count:  ${updatedValue}`);
+    }
+
+    decrementCallLimitCounter(newServerTime) {
+        let oldServerTime = parseInt(window.localStorage.getItem("krakenAPILastServerCall"));
+        let decrementAmount = Math.round((newServerTime - oldServerTime) / 3);
+
+        // Get the current value
+        let currentValue = parseInt(window.localStorage.getItem("krakenAPICallCounter"));
+        let updatedValue = ((currentValue === null || isNaN(currentValue)) ? 0 : currentValue - decrementAmount);
+        updatedValue = (updatedValue < 0 ? 0 : updatedValue);
+
+        window.localStorage.setItem("krakenAPICallCounter", updatedValue);
+
+        console.log(`Updated Call Count:  ${updatedValue}`);
+    }
+
     getServerTime2() {
         let xmlhttp = new XMLHttpRequest();
         let extendedURL = this.proxyBaseURL + "Time";
