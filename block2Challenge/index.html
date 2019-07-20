@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Kraken Cryptocurrency Data</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
     <h1>Kraken Cryptocurrency Data</h1>
-    <p>Please select a primary currency to review below:</p>
+    <h2>Currency Selection</h2>
 
     <div id="primaryCurrencyDiv"></div>
     <div id="secondaryCurrencyDiv"></div>
 
-    <div id="assetDisplay"></div>
+    <div id="assetDisplay">
+        <h2>Currency Pair Information</h2>
+        <div id="assetPair"></div>
+        <div id="tickerInfo"></div>
+        <div id="ohlcData"></div>
+        <div id="orderBook"></div>
+        <div id="recentTrades"></div>
+        <div id="recentSpread"></div>
+    </div>
 
     <script src="index.js" type="module"></script>
+
 </body>
 </html>

@@ -1,9 +1,9 @@
-class ViewBuilder {
+class MenuBuilder {
     addCurrencyMenu(assetList, name, title) {
         let newForm = document.createElement("form");
         newForm.id = `${name}Form`;
 
-        let newFormTitle = document.createElement("h2");
+        let newFormTitle = document.createElement("h3");
         newFormTitle.innerText = title;
         newForm.appendChild(newFormTitle);
 
@@ -31,6 +31,8 @@ class ViewBuilder {
 
         return newForm;
     }
+
+
 }
 
-export default ViewBuilder;
+export default MenuBuilder;

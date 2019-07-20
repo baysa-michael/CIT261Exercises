@@ -49,7 +49,7 @@ class KrakenAssetPairs {
         return this.assetPairList.filter((item) => {
             return ((item.baseName === primaryCurrency && item.quoteName === secondaryCurrency) ||
                 (item.baseName === secondaryCurrency && item.quoteName === primaryCurrency) &&
-                (!item.primaryName.includes(".D")))[0];
+                (!item.primaryName.includes(".D")));
         });
     }
 
