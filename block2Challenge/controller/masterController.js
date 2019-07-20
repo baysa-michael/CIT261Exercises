@@ -1,7 +1,11 @@
 import MenuBuilder from "../view/menuBuilder.js";
 import TableBuilder from "../view/tableBuilder.js";
 import KrakenPublicAPIUtilities from '../utilities/krakenPublicAPIUtilities.js';
-import Chart from "../utilities/node_modules/chart.js/dist/Chart.js";
+import KrakenTickerInformation from "../model/krakenTickerInformation.js";
+import KrakenOHLCData from "../model/krakenOHLCData.js";
+import KrakenOrderBook from "../model/KrakenOrderBook.js";
+import KrakenRecentTrades from "../model/krakenRecentTrades.js";
+import KrakenRecentSpread from "../model/krakenRecentSpread.js";
 
 class MasterController {
     constructor(serverTime, assetList, assetPairList) {
@@ -41,6 +45,16 @@ class MasterController {
             "primaryCurrency", "Primary Currency");
 
         primaryCurrencyMenu.addEventListener("change", (event) => {
+            // Clear old display
+            this.secondaryCurrencyDiv.innerHTML = "";
+            this.assetPairDiv.innerHTML = "";
+            this.tickerInfoDiv.innerHTML = "";
+            this.ohlcDataDiv.innerHTML = "";
+            this.orderBookDiv.innerHTML = "";
+            this.recentTradesDiv.innerHTML = "";
+            this.recentSpreadDiv.innerHTML = "";
+
+
             this.primaryCurrency = event.target.value;
             this.addSecondaryCurrencySelector();
         });
@@ -75,6 +89,11 @@ class MasterController {
             });
 
             this.secondaryCurrencyDiv.appendChild(secondaryCurrencyMenu);
+        } else {
+            let noAssetMessage = document.createElement("p");
+            noAssetMessage.innerText = "The selected primary asset is not paired up with any other assets.";
+
+            this.secondaryCurrencyDiv.appendChild(noAssetMessage);
         }
     }
 
@@ -88,31 +107,31 @@ class MasterController {
 
         // Retrieve the currency pair information
         let returnTicker = this.apiInterface.getTickerInformation(this.currencyPairName).then((response) => {
-            return response;
+            return new KrakenTickerInformation(response);
         }).catch((error) => {
             console.log(error.toString());
         });
 
-        let returnOHLCData = this.apiInterface.getOHLCData(this.currencyPairName, 1440).then((response) => {
-            return response;
+        let returnOHLCData = this.apiInterface.getOHLCData(this.currencyPairName, 1440, this.serverTime.unixtime - (60 * 60 * 24 * 30)).then((response) => {
+            return new KrakenOHLCData(response);
         }).catch((error) => {
             console.log(error.toString());
         });
 
         let returnOrderBook = this.apiInterface.getOrderBook(this.currencyPairName).then((response) => {
-            return response;
+            return new KrakenOrderBook(response);
         }).catch((error) => {
             console.log(error.toString());
         });
 
         let returnRecentTrades = this.apiInterface.getRecentTrades(this.currencyPairName).then((response) => {
-            return response;
+            return new KrakenRecentTrades(response);
         }).catch((error) => {
             console.log(error.toString());
         });
 
         let returnRecentSpread = this.apiInterface.getRecentSpread(this.currencyPairName).then((response) => {
-            return response;
+            return new KrakenRecentSpread(response);
         }).catch((error) => {
             console.log(error.toString());
         });
@@ -134,10 +153,10 @@ class MasterController {
         this.recentTrades = recentTrades;
         this.recentSpread = recentSpread;
 
-        console.log(this.assetPair);
 /*
-        console.log(this.tickerInfo);
         console.log(this.ohlcData);
+        console.log(this.assetPair);
+        console.log(this.tickerInfo);
         console.log(this.orderBook);
         console.log(this.recentTrades);
         console.log(this.recentSpread);
@@ -146,6 +165,7 @@ class MasterController {
 
     displayAssetPairInformation() {
         this.myTableBuilder.buildAssetPairTable(this.assetPair, this.baseAsset.altName, this.quoteAsset.altName, this.assetPairDiv);
+        this.myTableBuilder.buildOHLCTable(this.ohlcData, this.ohlcDataDiv);
     }
 }
 
